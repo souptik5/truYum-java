@@ -1,6 +1,7 @@
 package com.cognizant.truyum.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.cognizant.truyum.model.MenuItem;
@@ -52,19 +53,48 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 
 	@Override
 	public List<MenuItem> getMenuItemListCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<MenuItem> customerMenu = new ArrayList<>();
+
+		for (MenuItem item : menuItemList) {
+
+			if (item.isActive() == true && (item.getDateOfLaunch().before(new Date()))) {
+				customerMenu.add(item);
+			}
+		}
+
+		return customerMenu;
+
 	}
 
 	@Override
 	public void modifyMenuItem(MenuItem menuItem) {
-		// TODO Auto-generated method stub
+
+		for (MenuItem m : menuItemList) {
+			if (m.getId() == menuItem.getId()) {
+
+				m.setId(menuItem.getId());
+				m.setName(menuItem.getName());
+				m.setPrice(menuItem.getPrice());
+				m.setActive(menuItem.isActive());
+				m.setDateOfLaunch(menuItem.getDateOfLaunch());
+				m.setCategory(menuItem.getCategory());
+				m.setFreeDelivery(menuItem.isFreeDelivery());
+
+			}
+		}
 
 	}
 
 	@Override
 	public MenuItem getMenuItem(long menuItemId) {
-		// TODO Auto-generated method stub
+
+		for (MenuItem m : menuItemList) {
+			if (m.getId() == menuItemId) {
+				return m;
+			}
+		}
+
 		return null;
 	}
 
