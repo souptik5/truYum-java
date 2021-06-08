@@ -15,6 +15,9 @@ public class Cart {
 		this.menuItemList = menuItemList;
 		this.total = total;
 	}
+	public Cart() {
+		// TODO Auto-generated constructor stub
+	}
 	public List<MenuItem> getMenuItemList() {
 		return menuItemList;
 	}
